@@ -1,0 +1,34 @@
+-- Define the target CFrames
+local cframe1 = CFrame.new(13767, -2.32819319, -18553.1836, 0, 0, 1, -1, 0, 0, 0, -1, 0)
+local cframe2 = CFrame.new(13890, -2.32819319, -18553.1836, 0, 0, 1, -1, 0, 0, 0, -1, 0)
+local cframe3 = CFrame.new(13767, -2.32819319, -18553.1836, 0, 0, 1, -1, 0, 0, 0, -1, 0)
+local cframe4 = CFrame.new(13890, -2.32819319, 38872.7852, 0, 0, -1, -1, 0, 0, 0, 1, 0)
+
+-- Array to hold the target CFrames
+local cframes = {cframe1, cframe2, cframe3, cframe4}
+
+-- Function to teleport the player to the specified CFrame
+local function teleportPlayer(cframe)
+    local player = game.Players.LocalPlayer
+    if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+        player.Character.HumanoidRootPart.CFrame = cframe
+    end
+end
+
+-- Function to reset the player's character
+local function resetCharacter()
+    local player = game.Players.LocalPlayer
+    if player and player.Character then
+        player.Character:BreakJoints()
+    end
+end
+
+-- Run the teleport function in a loop with character resets
+while true do
+    for _, cframe in ipairs(cframes) do
+        teleportPlayer(cframe)
+        wait(0.3) -- Wait 0.5 seconds before reset
+        resetCharacter()
+        wait(0.5)
+    end
+end
